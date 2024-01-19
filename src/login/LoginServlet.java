@@ -1,3 +1,4 @@
+package login;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -40,7 +41,7 @@ public class LoginServlet extends HttpServlet {
 		String nomeUtente = request.getParameter("username");
 		byte[] password = request.getParameter("pass").getBytes();
 		try {
-			if (isUserValid(nomeUtente, password)) {
+			if (LoginDao.isUserValid(nomeUtente, password)) {
 				response.sendRedirect("benvenuto.jsp");
 			} else {
 				response.sendRedirect("errore.jsp");
@@ -48,11 +49,6 @@ public class LoginServlet extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
-
-	private boolean isUserValid(String nomeUtente, byte[] password) {
-		// TODO Auto-generated method stub
-		return false;
 	}
 
 }

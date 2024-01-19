@@ -4,10 +4,10 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Login</title>
 </head>
 <body>
-	<form method="post" action="LoginServlet">
+	<form method="post" action="LoginServlet" id="formLogin">
 		<table>
 			<tr>
 				<td>User name</td>
@@ -20,6 +20,14 @@
 			<tr>
 				<td></td>
 				<td><input type="submit" value="login"></td>
+			</tr>
+			<tr>
+				<td>Ricordami</td>
+				<td><input type="checkbox" name="ricordami"></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><input type="submit" value="registrati"></td>
 			</tr>
 		</table>
 	</form>
