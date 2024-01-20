@@ -8,9 +8,10 @@
 </head>
 <body>
 	<form method="post" action="LoginServlet" id="formLogin">
+		<h1>Login</h1>
 		<table>
 			<tr>
-				<td>User name</td>
+				<td>Username</td>
 				<td><input type="text" name="username"></td>
 			</tr>
 			<tr>
@@ -19,15 +20,15 @@
 			</tr>
 			<tr>
 				<td></td>
-				<td><input type="submit" value="login"></td>
+				<td><input type="submit" value="Login"></td>
 			</tr>
 			<tr>
 				<td>Ricordami</td>
-				<td><input type="checkbox" name="ricordami"></td>
+				<td><input type="checkbox" name="Ricordami"></td>
 			</tr>
 			<tr>
 				<td></td>
-				<td><input type="submit" value="registrati"></td>
+				<td><input type="button" value="Registrati" onclick="location.href='registration.jsp';"></td>
 			</tr>
 		</table>
 	</form>

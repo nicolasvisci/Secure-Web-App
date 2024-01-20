@@ -12,7 +12,7 @@ public class LoginDao {
 			String url = "jdbc:mysql://localhost:3306/my_db1";
 			// oggetto connessione al db tramite inserimento di credenziali: stringa di
 			// connessione - nome utente - password
-			Connection con = DriverManager.getConnection(url, "user_read", "YOUR PASSWORD"); //Inserire la password di MySQL
+			Connection con = DriverManager.getConnection(url, "user_read", "YOURPASSWORD"); //Inserire la password di MySQL
 			// oggetto prepared statement che consente di eseguire una query al db...
 			PreparedStatement ps = con.prepareStatement("SELECT * FROM user WHERE username=? AND password=?");
 			// ... a partire dal nome e ...
