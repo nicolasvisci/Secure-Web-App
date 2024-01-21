@@ -7,6 +7,14 @@
 <title>Benvenuto</title>
 </head>
 <body>
-	<h1>Benvenuto</h1>
+	<h1>Benvenuto, nomeUtente</h1>
+	<form>
+		<table>
+		<tr>
+				<td></td>
+				<td><input type="button" value="Logout" onclick="location.href='login.jsp';"></td>
+		</tr>
+		</table>
+	</form>
 </body>
 </html>
