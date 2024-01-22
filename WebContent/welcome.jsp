@@ -1,20 +1,26 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
-<html>
+<html lang="it">
 <head>
-<meta charset="ISO-8859-1">
-<title>Benvenuto</title>
+<meta charset="UTF-8">
+<title>HomePage - Proposte progettuali</title>
 </head>
 <body>
-	<h1>Benvenuto, nomeUtente</h1>
-	<form>
+	<h1>Benvenuto</h1>
+	<h2>Carica proposta progettuale</h2>
+	<form id="uploadForm" method="post" action=""
+		enctype="multipart/form-data" onsubmit="">
 		<table>
-		<tr>
-				<td></td>
+			<tr>
+				<td><input type="file" name="Proposta progettuale" autocomplete="off"></td>
+			</tr>
+			<tr>
+				<td><input type="submit" value="Carica Proposta"></td>			
+			</tr>
+			<tr>			
 				<td><input type="button" value="Logout" onclick="location.href='login.jsp';"></td>
-		</tr>
+			</tr>	
 		</table>
+		
 	</form>
 </body>
 </html>
