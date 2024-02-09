@@ -20,7 +20,7 @@
 			</tr>
 			<tr>
 				<td><label for="password">Password</label></td>
-				<td><input type="password" name="pass" id="pass"></td>
+				<td><input type="password" name="password" id="password"></td>
 			</tr>
 			<tr>
 				<td></td>
@@ -30,7 +30,7 @@
 			</tr>
 			<tr>
 				<td><label for="conferma_password">Conferma Password</label></td>
-				<td><input type="password" name="pass" id="pass"></td>
+				<td><input type="password" name="conferma_password" id="conferma_password"></td>
 			</tr>
 			<tr>
 				<td></td>

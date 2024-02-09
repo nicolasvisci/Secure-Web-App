@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import password.GestionePassword;
+
 /**
  * Servlet implementation class LoginServlet
  */
@@ -60,6 +62,7 @@ public class LoginServlet extends HttpServlet {
 				request.setAttribute("login", true); //Se questa variabile non viene inizializzata su true, l'utente non riesce ad accedere a benvenuto.jsp
 				request.setAttribute("nomeUtente", nomeUtente);
 				
+				GestionePassword.clearBytes(password);
 				nomeUtente = null;
 				
 				request.getRequestDispatcher("welcome.jsp").forward(request, response);
