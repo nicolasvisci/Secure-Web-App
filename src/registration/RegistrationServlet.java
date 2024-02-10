@@ -38,11 +38,9 @@ public class RegistrationServlet extends HttpServlet {
 
 						byte[] sale = GestionePassword.generateRandomBytes(16);
 						byte[] newPassword = GestionePassword.concatenateAndHash(password, sale);
-						
-						System.out.println("Password: " + password + " Sale:  " + sale +  " Password finale:  " + newPassword);
 
 						try {
-							if (RegistrationDao.registration(nomeUtente, newPassword, sale)) {
+							if (RegistrationDao.userRegistration(nomeUtente, newPassword, sale)) {
 
 								nomeUtente = null;
 								GestionePassword.clearBytes(newPassword);

@@ -9,6 +9,7 @@
 <body>
 	<div>
 		<form method="post" action="LoginServlet" id="formLogin">
+		<h1>Login</h1>
 			<table>
 				<tr>
 					<td>Username</td>

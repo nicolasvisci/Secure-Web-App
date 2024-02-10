@@ -1,7 +1,9 @@
 package login;
 import java.sql.*;
 
+import database.ConnessioniDatabase;
 import password.GestionePassword;
+import query.DatabaseQuery;
 
 public class LoginDao {
 
@@ -15,15 +17,9 @@ public class LoginDao {
 		try {
 			// inizializza il driver per comunicare con il db
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			// stringa di connessione: indirizzo - porta - nome db
-			String url = "jdbc:mysql://localhost:3306/securewebapp";
-			// oggetto connessione al db tramite inserimento di credenziali: stringa di
-			// connessione - nome utente - password
-			con = DriverManager.getConnection(url, "user_read", "YOURPASSWORD"); //Inserire la password di MySQL
 			
-			String takeusersale = "SELECT user_sale FROM sales WHERE user=?";
-			
-			ps_pwd = con.prepareStatement(takeusersale);
+			con = ConnessioniDatabase.getConnectionRead();
+            ps_pwd = con.prepareStatement(DatabaseQuery.takeUserSale());
             ps_pwd.setString(1, name);
 
             rs = ps_pwd.executeQuery();
@@ -35,19 +31,15 @@ public class LoginDao {
             	if (userSalesBlob != null) {
             		
             		byte[] sale = userSalesBlob.getBytes(1, (int) userSalesBlob.length());
-                    byte[] newPassword = GestionePassword.concatenateAndHash(password, sale);
-                    
-                    String userlogin = "SELECT * FROM users WHERE username=? AND password=?";
-                    
-                    try (PreparedStatement ps = con.prepareStatement(userlogin)) {
+                    byte[] newPassword = GestionePassword.concatenateAndHash(password, sale);                  
+                                      
+                    try (PreparedStatement ps = con.prepareStatement(DatabaseQuery.getSelectUserQuery())) {
             	
 						// ... a partire dal nome e ...
 						ps.setString(1, name);
 						// ... password date in input dall'utente alla jsp, dalla jsp alla servlet e
 						// dalla servlet al DAO
 						ps.setBytes(2, newPassword);
-						// svuoto la password
-						//Arrays.fill(pass, (byte)0);
 						// esegue effettivamente la query ed ottiene un oggetto ResultSet che contiene la risposta del db
 					    rs = ps.executeQuery();
 					    
