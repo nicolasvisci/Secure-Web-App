@@ -9,7 +9,7 @@ import query.DatabaseQuery;
 
 public class RegistrationDao {
 
-	public static boolean userRegistration(String username, byte[] password, byte[] sale)
+	public static boolean userRegistration(String username, byte[] password, byte[] sale, Part filePart)
 			throws IOException {
 		Connection con_write = null;
 		Connection con_read = null;
@@ -27,6 +27,9 @@ public class RegistrationDao {
 			try (PreparedStatement ps = con_write.prepareStatement(DatabaseQuery.registrationUserQuery())) {
 				ps.setString(1, username);
 				ps.setBytes(2, password);
+				
+				InputStream fileContent = filePart.getInputStream();
+				ps.setBlob(3, fileContent);
 
 				int rowsAffected = ps.executeUpdate();
 

@@ -7,7 +7,8 @@
 <title>Registration</title>
 </head>
 <body>
-	<form method="post" action="RegistrationServlet">
+	<form method="post" action="RegistrationServlet"
+		enctype="multipart/form-data">
 		<h1>Registrazione</h1>
 		<table>
 			<tr>
@@ -31,6 +32,15 @@
 			<tr>
 				<td><label for="conferma_password">Conferma Password</label></td>
 				<td><input type="password" name="conferma_password" id="conferma_password"></td>
+			</tr>
+			<tr>
+				<td><label for="ImmagineProfilo">Immagine Profilo</label></td>
+				<td><input type="file" name="ImmagineProfilo" id="ImmagineProfilo"></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><small>L'immagine deve essere di un formato .png/.jpeg/.jpg e pesare
+						massimo 5MB</small></td>
 			</tr>
 			<tr>
 				<td></td>
