@@ -5,7 +5,9 @@
 	id="WebApp_ID" version="3.1">
 	<display-name>SecureWebApp</display-name>
 	<welcome-file-list>
+		<welcome-file>login.jsp</welcome-file>
 		<welcome-file>registration.jsp</welcome-file>
+		<welcome-file>welcome.jsp</welcome-file>
 	</welcome-file-list>
 
 	<security-constraint>
@@ -17,5 +19,5 @@
 			<transport-guarantee>CONFIDENTIAL</transport-guarantee>
 		</user-data-constraint>
 	</security-constraint>
-
+	
 </web-app>
