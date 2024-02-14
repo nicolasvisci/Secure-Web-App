@@ -7,6 +7,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
+import pannel.CustomMessage;
+
 public class ConnessioniDatabase {
 	private static String URL;
 	private static String USERNAME_READ;
@@ -29,7 +31,7 @@ public class ConnessioniDatabase {
 
 		} catch (IOException e) {
 			e.printStackTrace();
-			System.out.println("Sembra esserci un problema con qualche file di configurazione!");
+			CustomMessage.showPanel("Sembra esserci un problema con qualche file di configurazione!");
 			throw new RuntimeException("Errore nel caricamento del file di configurazione", e);
 		}
 	}

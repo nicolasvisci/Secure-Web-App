@@ -7,6 +7,8 @@ import javax.servlet.http.Part;
 
 import org.apache.tika.Tika;
 
+import pannel.CustomMessage;
+
 public class CheckFile {
 
 	static boolean checkImageFile(Part filePart) throws IOException {
@@ -22,7 +24,7 @@ public class CheckFile {
 				
 				if (filePart.getSize() > maxSizeInBytes) {
 					// Il file e' troppo grande
-					System.out.println("L'immagine selezionata supera la dimensione massima consentita che e' di 5 MB");
+					CustomMessage.showPanel("L'immagine selezionata supera la dimensione massima consentita che e' di 5 MB");
 					return false;
 
 				}
@@ -33,16 +35,16 @@ public class CheckFile {
 
 				} else {
 
-					System.out.println("Il file non e' un'immagine valida.");
+					CustomMessage.showPanel("Il file non e' un'immagine valida.");
 					return false;
 				}
 			} else {
 
-				System.out.println("Estensione del file non supportata.");
+				CustomMessage.showPanel("Estensione del file non supportata.");
 				return false;
 			}
 		} else {
-			System.out.println("Nessun file caricato");
+			CustomMessage.showPanel("Nessun file caricato");
 			return false;
 
 		}

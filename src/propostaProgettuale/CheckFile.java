@@ -13,6 +13,8 @@ import org.apache.tika.Tika;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
+import pannel.CustomMessage;
+
 public class CheckFile {
 
 	static boolean checkPropostaFile(Part filePart, ServletContext context) throws IOException {
@@ -33,11 +35,11 @@ public class CheckFile {
 				return true;
 			} else {
 				// L'estensione del file non e' ".txt"
-				System.out.println("Puoi caricare solo file di testo in formato txt!");
+				CustomMessage.showPanel("Puoi caricare solo file di testo in formato txt!");
 			}
 		} else {
 			// Nessun file caricato
-			System.out.println("Devi caricare una proposta progettuale!");
+			CustomMessage.showPanel("Devi caricare una proposta progettuale!");
 		}
 		// Se si arriva qui, qualcosa e' andato storto, restituisci false
 		return false;
@@ -49,7 +51,7 @@ public class CheckFile {
 		try {
 			long maxSizeInBytes = 20 * 1024 * 1024;
 			if (filePart.getSize() > maxSizeInBytes) {
-				System.out.println(
+				CustomMessage.showPanel(
 						"Il file supera la dimensione massima consentita. Il file puo' essere massimo di 20 MB");
 				return null;
 			}
@@ -80,14 +82,14 @@ public class CheckFile {
 
 				return cleanedHtml;
 			} else {
-				System.out.println("Il file contiene del testo non valido!");
+				CustomMessage.showPanel("Il file contiene del testo non valido!");
 
 				// Restituisci null quando il file non e' valido
 				return null;
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
-			System.out.println("C'e' stato un problema con il caricamento del file!");
+			CustomMessage.showPanel("C'e' stato un problema con il caricamento del file!");
 
 			// Restituisci null in caso di eccezione
 			return null;

@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.sql.*;
 
 import database.ConnessioniDatabase;
+import pannel.CustomMessage;
 import query.DatabaseQuery;
 
 public class PropostaDao {
@@ -27,11 +28,11 @@ public class PropostaDao {
                 return rowsAffected > 0;
 
             } catch (SQLException e) {
-                System.out.println("Si e' verificato un errore durante l'inserimento della proposta!");
+                CustomMessage.showPanel("Si e' verificato un errore durante l'inserimento della proposta!");
                 e.printStackTrace();
             }
         } catch (ClassNotFoundException e) {
-        	System.out.println("Si e' verificato un problema di connessione!");
+            CustomMessage.showPanel("Si e' verificato un problema di connessione!");
             e.printStackTrace();
         } finally {
             // Chiusura della connessione nel blocco finally

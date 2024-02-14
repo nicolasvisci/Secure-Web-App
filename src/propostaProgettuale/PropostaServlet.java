@@ -15,6 +15,8 @@ import javax.servlet.http.Part;
 
 import com.google.gson.Gson;
 
+import pannel.CustomMessage;
+
 /**
  * Servlet implementation class LoginServlet
  */
@@ -59,13 +61,13 @@ public class PropostaServlet extends HttpServlet {
 
 			try {
 				if (PropostaDao.uploadFile(nomeUtente, htmlBytes, nomeFile)) {
-					System.out.println("La proposta e' stata correttamente caricata!");
+					CustomMessage.showPanel("La proposta e' stata correttamente caricata!");
 
 					// Invia il contenuto filtrato come risposta AJAX
 					response.setContentType("text/plain");
 					response.getWriter().write(cleanedHtml);
 				} else {
-					System.out.println("Non e' stato possibile caricare il file della proposta!");
+					CustomMessage.showPanel("Non e' stato possibile caricare il file della proposta!");
 					response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 				}
 			} catch (Exception e) {
@@ -73,7 +75,7 @@ public class PropostaServlet extends HttpServlet {
 				response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 			}
 		} else {
-			System.out.println("File non valido!");
+			CustomMessage.showPanel("File non valido!");
 			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 		}
 	}

@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.sql.*;
 import javax.servlet.http.Part;
 import database.ConnessioniDatabase;
+import pannel.CustomMessage;
 import query.DatabaseQuery;
 
 public class RegistrationDao {
@@ -16,18 +17,21 @@ public class RegistrationDao {
 
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
+
 			con_write = ConnessioniDatabase.getConnectionWrite();
 			con_read = ConnessioniDatabase.getConnectionRead();
+
 			// Verifica se l'utente esiste gia'
 			if (userAlreadyExists(username, con_read) > 0) {
-				System.out.println("Utente gia' registrato!");
+				CustomMessage.showPanel("Utente gia' registrato!");
 				return false; 
 			}
+
 			
 			try (PreparedStatement ps = con_write.prepareStatement(DatabaseQuery.registrationUserQuery())) {
 				ps.setString(1, username);
 				ps.setBytes(2, password);
-				
+
 				InputStream fileContent = filePart.getInputStream();
 				ps.setBlob(3, fileContent);
 
@@ -35,12 +39,14 @@ public class RegistrationDao {
 
 				// Imposta lo stato a true se almeno una riga e' stata aggiornata
 				boolean status = (rowsAffected > 0);
-				System.out.println("Registrazione effettuata con successo!");
+				CustomMessage.showPanel("Registrazione effettuata con successo!");
+
 				
 				if (status) {
 					try (PreparedStatement psSale = con_write.prepareStatement(DatabaseQuery.userSaleQuery())) {
 						psSale.setString(1, username);
 						psSale.setBytes(2, sale);
+
 						
 						int rowsAffectedSale = psSale.executeUpdate();
 
@@ -67,7 +73,7 @@ public class RegistrationDao {
 				}
 			}
 		}
-		System.out.println("Non e' stato possibile terminare la registrazione!");
+		CustomMessage.showPanel("Non e' stato possibile terminare la registrazione!");
 		return false; 
 	}
 

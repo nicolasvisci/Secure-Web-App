@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.Arrays;
 import javax.servlet.http.Part;
 
+import pannel.CustomMessage;
 import password.GestionePassword;
 
 @MultipartConfig
@@ -63,34 +64,34 @@ public class RegistrationServlet extends HttpServlet {
 								GestionePassword.clearBytes(password);
 								GestionePassword.clearBytes(conferma_password);
 								GestionePassword.clearBytes(sale);
-								System.out.println("Errore durante la registrazione!");
+								CustomMessage.showPanel("Errore durante la registrazione!");
 								request.getRequestDispatcher("registration.jsp").forward(request, response);
 								
 							}
 						} catch (Exception e) {
 							e.printStackTrace();
-							System.out.println("Errore durante la registrazione!");
+							CustomMessage.showPanel("Errore durante la registrazione!");
 							request.getRequestDispatcher("registration.jsp").forward(request, response);
 						}
 					} else {
-						System.out.println("Immagine non valida!");
+						CustomMessage.showPanel("Immagine non valida!");
 						request.getRequestDispatcher("registration.jsp").forward(request, response);
 
 					}
 				} else {
-					System.out.println("Le password non corrispondono!");
+					CustomMessage.showPanel("Le password non corrispondono!");
 					request.getRequestDispatcher("registration.jsp").forward(request, response);
 
 				}
 			} else {
-				System.out.println("La password non rispetta i requisiti minimi di sicurezza!");
+				CustomMessage.showPanel("La password non rispetta i requisiti minimi di sicurezza!");
 				request.getRequestDispatcher("registration.jsp").forward(request, response);
 
 			}
 
 		} else {
 
-			System.out.println("Il nome contiene caratteri non validi!");
+			CustomMessage.showPanel("Il nome contiene caratteri non validi!");
 			request.getRequestDispatcher("registration.jsp").forward(request, response);
 
 		}

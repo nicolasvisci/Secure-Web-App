@@ -1,50 +1,44 @@
 package login;
+
 import java.sql.*;
 
 import database.ConnessioniDatabase;
 import password.GestionePassword;
 import query.DatabaseQuery;
+import pannel.CustomMessage;
 
 public class LoginDao {
+    static boolean isUserValid(String name, byte[] password) {
+        boolean status = false;
 
-	public static boolean isUserValid(String name, byte[] password) {
-		boolean status = false;
-		
-		Connection con = null;
-		ResultSet rs = null;
-		PreparedStatement ps_pwd = null;
-		
-		try {
-			// inizializza il driver per comunicare con il db
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			
-			con = ConnessioniDatabase.getConnectionRead();
+        Connection con = null;
+        PreparedStatement ps_pwd = null;
+        ResultSet rs = null;
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            con = ConnessioniDatabase.getConnectionRead();
             ps_pwd = con.prepareStatement(DatabaseQuery.takeUserSale());
             ps_pwd.setString(1, name);
 
             rs = ps_pwd.executeQuery();
-            
+
             if (rs.next()) {
-            	
-            	Blob userSalesBlob = rs.getBlob("user_sale");
-            	
-            	if (userSalesBlob != null) {
-            		
-            		byte[] sale = userSalesBlob.getBytes(1, (int) userSalesBlob.length());
-                    byte[] newPassword = GestionePassword.concatenateAndHash(password, sale);                  
-                                      
+                Blob userSalesBlob = rs.getBlob("user_sale");
+
+                if (userSalesBlob != null) {
+                    byte[] sale = userSalesBlob.getBytes(1, (int) userSalesBlob.length());
+                    byte[] newPassword = GestionePassword.concatenateAndHash(password, sale);
+
                     try (PreparedStatement ps = con.prepareStatement(DatabaseQuery.getSelectUserQuery())) {
-            	
-						// ... a partire dal nome e ...
-						ps.setString(1, name);
-						// ... password date in input dall'utente alla jsp, dalla jsp alla servlet e
-						// dalla servlet al DAO
-						ps.setBytes(2, newPassword);
-						// esegue effettivamente la query ed ottiene un oggetto ResultSet che contiene la risposta del db
-					    rs = ps.executeQuery();
-					    
-					    boolean userFound = rs.next();
-					    name = null;
+                        ps.setString(1, name);
+                        ps.setBytes(2, newPassword);
+
+                        rs = ps.executeQuery();
+                        boolean userFound = rs.next();
+
+                        name = null;
                         GestionePassword.clearBytes(password);
                         GestionePassword.clearBytes(sale);
                         GestionePassword.clearBytes(newPassword);
@@ -52,21 +46,21 @@ public class LoginDao {
                         if (userFound) {
                             System.out.println("Utente trovato");
                         } else {
-                            System.out.println("Errore nell'inserimento dei dati dell'utente. Riprova");
+                            CustomMessage.showPanel("Errore nell'inserimento dei dati dell'utente. Riprova"); //VALUTARE DI ELIMINARE?
                         }
-						status = userFound;					
-                    }					
-            	}else {
+                        status = userFound;
+                    }
+                } else {
                     name = null;
                     GestionePassword.clearBytes(password);
                     System.out.println("User_Sales e' nullo");
                 }
-            }else {
+            } else {
                 name = null;
                 GestionePassword.clearBytes(password);
                 System.out.println("Nessun risultato trovato per l'utente: " + name);
-            }			
-		} catch (ClassNotFoundException | SQLException e) {
+            }
+        } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         } finally {
             // Chiusura delle risorse
@@ -85,5 +79,5 @@ public class LoginDao {
             }
         }
         return status;
-	}
+    }
 }
