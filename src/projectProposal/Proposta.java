@@ -1,4 +1,4 @@
-package propostaProgettuale;
+package projectProposal;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

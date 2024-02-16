@@ -3,7 +3,7 @@ package login;
 import java.sql.*;
 
 import database.ConnessioniDatabase;
-import password.GestionePassword;
+import password.PasswordManagement;
 import query.DatabaseQuery;
 import pannel.CustomMessage;
 
@@ -29,7 +29,7 @@ public class LoginDao {
 
 				if (userSalesBlob != null) {
 					byte[] sale = userSalesBlob.getBytes(1, (int) userSalesBlob.length());
-					byte[] newPassword = GestionePassword.concatenateAndHash(password, sale);
+					byte[] newPassword = PasswordManagement.concatenateAndHash(password, sale);
 
 					try (PreparedStatement ps = con.prepareStatement(DatabaseQuery.getSelectUserQuery())) {
 						ps.setString(1, name);
@@ -39,9 +39,9 @@ public class LoginDao {
 						boolean userFound = rs.next();
 
 						name = null;
-						GestionePassword.clearBytes(password);
-						GestionePassword.clearBytes(sale);
-						GestionePassword.clearBytes(newPassword);
+						PasswordManagement.clearBytes(password);
+						PasswordManagement.clearBytes(sale);
+						PasswordManagement.clearBytes(newPassword);
 
 						if (userFound) {
 							System.out.println("Utente trovato");
@@ -54,12 +54,12 @@ public class LoginDao {
 					}
 				} else {
 					name = null;
-					GestionePassword.clearBytes(password);
+					PasswordManagement.clearBytes(password);
 					System.out.println("User_Sales e' nullo");
 				}
 			} else {
 				name = null;
-				GestionePassword.clearBytes(password);
+				PasswordManagement.clearBytes(password);
 				System.out.println("Nessun risultato trovato per l'utente: " + name);
 			}
 		} catch (ClassNotFoundException | SQLException e) {

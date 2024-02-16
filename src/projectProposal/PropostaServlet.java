@@ -1,4 +1,4 @@
-package propostaProgettuale;
+package projectProposal;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;

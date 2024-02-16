@@ -12,7 +12,7 @@ import java.util.Arrays;
 import javax.servlet.http.Part;
 
 import pannel.CustomMessage;
-import password.GestionePassword;
+import password.PasswordManagement;
 
 @MultipartConfig
 @WebServlet("/RegistrationServlet")
@@ -37,31 +37,31 @@ public class RegistrationServlet extends HttpServlet {
 		Part filePart = request.getPart("ImmagineProfilo");
 
 		if (nomeUtente.matches(regex) && nomeUtente.length() <= 45) {
-			if (GestionePassword.isStrongPassword(password)) {
+			if (PasswordManagement.isStrongPassword(password)) {
 				if (Arrays.equals(password, conferma_password)) {
 					if (CheckFile.checkImageFile(filePart)) {
 						System.out.println("File valido");
 
-						byte[] sale = GestionePassword.generateRandomBytes(16);
-						byte[] newPassword = GestionePassword.concatenateAndHash(password, sale);
+						byte[] sale = PasswordManagement.generateRandomBytes(16);
+						byte[] newPassword = PasswordManagement.concatenateAndHash(password, sale);
 
 						try {
 							if (RegistrationDao.userRegistration(nomeUtente, newPassword, sale, filePart)) {
 
 								nomeUtente = null;
-								GestionePassword.clearBytes(newPassword);
-								GestionePassword.clearBytes(password);
-								GestionePassword.clearBytes(conferma_password);
-								GestionePassword.clearBytes(sale);
+								PasswordManagement.clearBytes(newPassword);
+								PasswordManagement.clearBytes(password);
+								PasswordManagement.clearBytes(conferma_password);
+								PasswordManagement.clearBytes(sale);
 
 								response.sendRedirect("login.jsp");
 							} else {
 
 								nomeUtente = null;
-								GestionePassword.clearBytes(newPassword);
-								GestionePassword.clearBytes(password);
-								GestionePassword.clearBytes(conferma_password);
-								GestionePassword.clearBytes(sale);
+								PasswordManagement.clearBytes(newPassword);
+								PasswordManagement.clearBytes(password);
+								PasswordManagement.clearBytes(conferma_password);
+								PasswordManagement.clearBytes(sale);
 								CustomMessage.showPanel("Errore durante la registrazione!");
 								request.getRequestDispatcher("registration.jsp").forward(request, response);
 

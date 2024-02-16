@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-public class GestionePassword {
+public class PasswordManagement {
 
 	public static void clearBytes(byte[] password) {
 		if (password != null) {

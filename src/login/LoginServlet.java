@@ -16,7 +16,7 @@ import javax.servlet.http.HttpSession;
 import com.google.gson.JsonObject;
 
 import pannel.CustomMessage;
-import password.GestionePassword;
+import password.PasswordManagement;
 
 /**
  * Servlet implementation class LoginServlet
@@ -119,7 +119,7 @@ public class LoginServlet extends HttpServlet {
 					request.setAttribute("login", true); // Se questa variabile non viene inizializzata su true,
 															// l'utente non riesce ad accedere a benvenuto.jsp
 
-					GestionePassword.clearBytes(password);
+					PasswordManagement.clearBytes(password);
 					nomeUtente = null;
 
 					request.getRequestDispatcher("welcome.jsp").forward(request, response);
@@ -128,7 +128,7 @@ public class LoginServlet extends HttpServlet {
 					System.out.println("ERRORE metodo isUserValid checked - password: " + string_Password);
 
 					nomeUtente = null;
-					GestionePassword.clearBytes(password);
+					PasswordManagement.clearBytes(password);
 
 					CustomMessage.showPanel("Sembra che questo utente non esista! Controlla i dati inseriti.");
 					request.getRequestDispatcher("/login.jsp").forward(request, response);
@@ -149,7 +149,7 @@ public class LoginServlet extends HttpServlet {
 															// l'utente non riesce ad accedere a benvenuto.jsp
 					request.setAttribute("nomeUtente", nomeUtente);
 
-					GestionePassword.clearBytes(password);
+					PasswordManagement.clearBytes(password);
 					nomeUtente = null;
 
 					request.getRequestDispatcher("welcome.jsp").forward(request, response);
@@ -158,7 +158,7 @@ public class LoginServlet extends HttpServlet {
 					System.out.println("ERRORE metodo isUserValid 2 - password: " + string_Password);
 
 					nomeUtente = null;
-					GestionePassword.clearBytes(password);
+					PasswordManagement.clearBytes(password);
 
 					CustomMessage.showPanel("Password errata! Riprova.");
 					request.getRequestDispatcher("/login.jsp").forward(request, response);
