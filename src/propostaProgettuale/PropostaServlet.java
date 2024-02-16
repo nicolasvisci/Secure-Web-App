@@ -32,7 +32,7 @@ public class PropostaServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-	    
+
 		List<Proposta> proposte = Proposta.getProposte();
 
 		// Converti la lista in JSON

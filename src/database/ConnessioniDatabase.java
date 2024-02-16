@@ -15,7 +15,7 @@ public class ConnessioniDatabase {
 	private static String PASSWORD_READ;
 	private static String USERNAME_WRITE;
 	private static String PASSWORD_WRITE;
-	
+
 	static {
 		try (InputStream input = Thread.currentThread().getContextClassLoader().getResourceAsStream("config.ini")) {
 			Properties prop = new Properties();

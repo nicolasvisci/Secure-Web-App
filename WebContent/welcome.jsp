@@ -26,55 +26,53 @@ if (!isUserLoggedIn || isUserLoggedIn == null) {
 <style>
 /* Stile del form */
 #uploadForm {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: #f7f7f7;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	max-width: 600px;
+	margin: 0 auto;
+	padding: 20px;
+	background-color: #f7f7f7;
+	border-radius: 10px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 /* Stile dell'intestazione */
 h1 {
-  font-size: 24px;
-  color: #333;
-  margin-bottom: 20px;
+	font-size: 24px;
+	color: #333;
+	margin-bottom: 20px;
 }
 
 /* Stile della tabella */
 table {
-  width: 100%;
+	width: 100%;
 }
 
 /* Stile dei campi del modulo */
 input[type="file"] {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+	width: 100%;
+	padding: 10px;
+	margin-bottom: 10px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
 }
 
 /* Stile per il messaggio di avviso */
 small {
-  color: #888;
+	color: #888;
 }
 
 /* Stile per i pulsanti */
-input[type="submit"],
-input[type="button"] {
-  padding: 10px 20px;
-  background-color: #007bff;
-  border: none;
-  border-radius: 5px;
-  color: #fff;
-  cursor: pointer;
-  transition: background-color 0.3s;
+input[type="submit"], input[type="button"] {
+	padding: 10px 20px;
+	background-color: #007bff;
+	border: none;
+	border-radius: 5px;
+	color: #fff;
+	cursor: pointer;
+	transition: background-color 0.3s;
 }
 
-input[type="submit"]:hover,
-input[type="button"]:hover {
-  background-color: #0056b3;
+input[type="submit"]:hover, input[type="button"]:hover {
+	background-color: #0056b3;
 }
 
 input[type="button"].logout-button {
@@ -85,21 +83,20 @@ input[type="button"].logout-button {
 
 /* Stile del banner */
 #contenutoBanner {
-  background-color: #f9ca24;
-  color: black;
-  padding: 10px;
-  margin-top: 20px;
-  border-radius: 5px;
+	background-color: #f9ca24;
+	color: black;
+	padding: 10px;
+	margin-top: 20px;
+	border-radius: 5px;
 }
 
 /* Stile della lista delle proposte */
 #listaProposteBanner {
-  margin-top: 20px;
-  background-color: #dcdde1;
-  padding: 10px;
-  border-radius: 5px;
+	margin-top: 20px;
+	background-color: #dcdde1;
+	padding: 10px;
+	border-radius: 5px;
 }
-
 </style>
 
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
@@ -327,20 +324,18 @@ document.addEventListener("DOMContentLoaded", function() {
 				<!-- Banner -->
 				<!--<div id="banner">-->
 
-					<div id="contenutoBanner">
-						
-						<% if (propostePrimaCaricamento == null || propostePrimaCaricamento.isEmpty()) { %>
-                    <p>Seleziona una proposta progettuale.</p>
-                <% } %>
-					</div>
+				<div id="contenutoBanner">
+
+					<% if (propostePrimaCaricamento == null || propostePrimaCaricamento.isEmpty()) { %>
+					<p>Seleziona una proposta progettuale.</p>
+					<% } %>
+				</div>
 				<!-- </div> -->
 
 			</tr>
 			<tr>
 
-				<div id="listaProposteBanner">
-                
-            </div>
+				<div id="listaProposteBanner"></div>
 
 			</tr>
 		</table>

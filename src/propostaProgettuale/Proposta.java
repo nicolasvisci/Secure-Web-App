@@ -11,50 +11,49 @@ import database.ConnessioniDatabase;
 import query.DatabaseQuery;
 
 public class Proposta {
-    private String username;
-    private String nomeFile;
-    private String contenutoHtml;
+	private String username;
+	private String nomeFile;
+	private String contenutoHtml;
 
-    public Proposta(String username, String nomeFile, String contenutoHtml) {
-        this.username = username;
-        this.nomeFile = nomeFile;
-        this.contenutoHtml = contenutoHtml;
-    }
+	public Proposta(String username, String nomeFile, String contenutoHtml) {
+		this.username = username;
+		this.nomeFile = nomeFile;
+		this.contenutoHtml = contenutoHtml;
+	}
 
-    public static List<Proposta> getProposte() {
-        List<Proposta> proposte = new ArrayList<>();
+	public static List<Proposta> getProposte() {
+		List<Proposta> proposte = new ArrayList<>();
 
-        try (Connection connection = ConnessioniDatabase.getConnectionRead();
-             PreparedStatement preparedStatement = connection.prepareStatement(DatabaseQuery.takeUsernameAndProposta());
-             ResultSet resultSet = preparedStatement.executeQuery()) {
+		try (Connection connection = ConnessioniDatabase.getConnectionRead();
+				PreparedStatement preparedStatement = connection
+						.prepareStatement(DatabaseQuery.takeUsernameAndProposta());
+				ResultSet resultSet = preparedStatement.executeQuery()) {
 
-        	while (resultSet.next()) {
-        	    String username = resultSet.getString("username");
-        	    String nomeFile = resultSet.getString("nome_file");
-        	    String contenutoHtml = resultSet.getString("file");
-        	   
-        	    Proposta proposta = new Proposta(username, nomeFile, contenutoHtml);
-        	    proposte.add(proposta);
-        	}
+			while (resultSet.next()) {
+				String username = resultSet.getString("username");
+				String nomeFile = resultSet.getString("nome_file");
+				String contenutoHtml = resultSet.getString("file");
 
+				Proposta proposta = new Proposta(username, nomeFile, contenutoHtml);
+				proposte.add(proposta);
+			}
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 
-        return proposte;
-    }
-    
+		return proposte;
+	}
 
-    public String getUsername() {
-        return username;
-    }
-    
-    public String getContenutoHtml() {
-        return contenutoHtml;
-    }
+	public String getUsername() {
+		return username;
+	}
 
-    public String getNomeFile() {
-        return nomeFile;
-    }
+	public String getContenutoHtml() {
+		return contenutoHtml;
+	}
+
+	public String getNomeFile() {
+		return nomeFile;
+	}
 }

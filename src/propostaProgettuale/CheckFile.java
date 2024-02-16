@@ -27,7 +27,7 @@ public class CheckFile {
 			// Controlla l'estensione del file
 			String fileExtension = fileName.substring(fileName.lastIndexOf(".") + 1).toLowerCase();
 			if ("txt".equals(fileExtension)) {
-				
+
 				String realPath = context.getRealPath("/");
 				Path filePath = Paths.get(realPath, fileName);
 				System.out.println("filePath: " + filePath);
@@ -45,7 +45,6 @@ public class CheckFile {
 		return false;
 	}
 
-
 	static String processFile(Part filePart) {
 
 		try {
@@ -61,8 +60,7 @@ public class CheckFile {
 			String contentType = tika.detect(filePart.getInputStream());
 
 			if ("text/plain".equals(contentType) || "text/html".equals(contentType)) {
-				
-				
+
 				// Leggi il contenuto del filePart
 				InputStream fileContent = filePart.getInputStream();
 				byte[] contentBytes = new byte[fileContent.available()];
@@ -70,7 +68,7 @@ public class CheckFile {
 				String content = new String(contentBytes, StandardCharsets.UTF_8);
 
 				// Rimuovi gli script JavaScript, compreso il testo all'interno
-				
+
 				Document document = Jsoup.parse(content);
 				document.select("script, [type=application/javascript], [type=text/javascript]").remove();
 				document.select("[text]").unwrap(); // Rimuovi anche il testo all'interno dei tag script
@@ -112,5 +110,5 @@ public class CheckFile {
 			}
 		}
 		return "";
-	}	
+	}
 }

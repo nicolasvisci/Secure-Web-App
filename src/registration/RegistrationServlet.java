@@ -27,8 +27,6 @@ public class RegistrationServlet extends HttpServlet {
 		// TODO Auto-generated constructor stub
 	}
 
-	
-
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
@@ -66,7 +64,7 @@ public class RegistrationServlet extends HttpServlet {
 								GestionePassword.clearBytes(sale);
 								CustomMessage.showPanel("Errore durante la registrazione!");
 								request.getRequestDispatcher("registration.jsp").forward(request, response);
-								
+
 							}
 						} catch (Exception e) {
 							e.printStackTrace();
