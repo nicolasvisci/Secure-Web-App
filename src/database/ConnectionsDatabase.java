@@ -9,7 +9,7 @@ import java.util.Properties;
 
 import pannel.CustomMessage;
 
-public class ConnessioniDatabase {
+public class ConnectionsDatabase {
 	private static String URL;
 	private static String USERNAME_READ;
 	private static String PASSWORD_READ;

@@ -1,10 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@ page import="java.util.List"%>
-<%@ page import="projectProposal.Proposta"%>
+<%@ page import="projectProposal.Proposal"%>
 <%@ page import="javax.servlet.http.HttpSession"%>
 <%@ page import="javax.servlet.http.HttpServletRequest"%>
 <%
-List<Proposta> propostePrimaCaricamento = (List<Proposta>) request.getAttribute("propostePrimaCaricamento");
+List<Proposal> propostePrimaCaricamento = (List<Proposal>) request.getAttribute("propostePrimaCaricamento");
 %>
 
 <!DOCTYPE html>

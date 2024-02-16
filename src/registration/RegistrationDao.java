@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.*;
 import javax.servlet.http.Part;
-import database.ConnessioniDatabase;
+import database.ConnectionsDatabase;
 import pannel.CustomMessage;
 import query.DatabaseQuery;
 
@@ -18,8 +18,8 @@ public class RegistrationDao {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 
-			con_write = ConnessioniDatabase.getConnectionWrite();
-			con_read = ConnessioniDatabase.getConnectionRead();
+			con_write = ConnectionsDatabase.getConnectionWrite();
+			con_read = ConnectionsDatabase.getConnectionRead();
 
 			// Verifica se l'utente esiste gia'
 			if (userAlreadyExists(username, con_read) > 0) {

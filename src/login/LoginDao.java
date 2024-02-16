@@ -2,7 +2,7 @@ package login;
 
 import java.sql.*;
 
-import database.ConnessioniDatabase;
+import database.ConnectionsDatabase;
 import password.PasswordManagement;
 import query.DatabaseQuery;
 import pannel.CustomMessage;
@@ -18,7 +18,7 @@ public class LoginDao {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 
-			con = ConnessioniDatabase.getConnectionRead();
+			con = ConnectionsDatabase.getConnectionRead();
 			ps_pwd = con.prepareStatement(DatabaseQuery.takeUserSale());
 			ps_pwd.setString(1, name);
 

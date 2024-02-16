@@ -7,24 +7,24 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import database.ConnessioniDatabase;
+import database.ConnectionsDatabase;
 import query.DatabaseQuery;
 
-public class Proposta {
+public class Proposal {
 	private String username;
 	private String nomeFile;
 	private String contenutoHtml;
 
-	public Proposta(String username, String nomeFile, String contenutoHtml) {
+	public Proposal(String username, String nomeFile, String contenutoHtml) {
 		this.username = username;
 		this.nomeFile = nomeFile;
 		this.contenutoHtml = contenutoHtml;
 	}
 
-	public static List<Proposta> getProposte() {
-		List<Proposta> proposte = new ArrayList<>();
+	public static List<Proposal> getProposte() {
+		List<Proposal> proposte = new ArrayList<>();
 
-		try (Connection connection = ConnessioniDatabase.getConnectionRead();
+		try (Connection connection = ConnectionsDatabase.getConnectionRead();
 				PreparedStatement preparedStatement = connection
 						.prepareStatement(DatabaseQuery.takeUsernameAndProposta());
 				ResultSet resultSet = preparedStatement.executeQuery()) {
@@ -34,7 +34,7 @@ public class Proposta {
 				String nomeFile = resultSet.getString("nome_file");
 				String contenutoHtml = resultSet.getString("file");
 
-				Proposta proposta = new Proposta(username, nomeFile, contenutoHtml);
+				Proposal proposta = new Proposal(username, nomeFile, contenutoHtml);
 				proposte.add(proposta);
 			}
 

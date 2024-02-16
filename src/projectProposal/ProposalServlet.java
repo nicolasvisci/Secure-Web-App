@@ -23,17 +23,17 @@ import pannel.CustomMessage;
 
 @WebServlet("/PropostaServlet")
 @MultipartConfig
-public class PropostaServlet extends HttpServlet {
+public class ProposalServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public PropostaServlet() {
+	public ProposalServlet() {
 		super();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		List<Proposta> proposte = Proposta.getProposte();
+		List<Proposal> proposte = Proposal.getProposte();
 
 		// Converti la lista in JSON
 		String jsonProposte = new Gson().toJson(proposte);
@@ -60,7 +60,7 @@ public class PropostaServlet extends HttpServlet {
 			byte[] htmlBytes = cleanedHtml.getBytes(StandardCharsets.UTF_8);
 
 			try {
-				if (PropostaDao.uploadFile(nomeUtente, htmlBytes, nomeFile)) {
+				if (ProposalDao.uploadFile(nomeUtente, htmlBytes, nomeFile)) {
 					CustomMessage.showPanel("La proposta e' stata correttamente caricata!");
 
 					// Invia il contenuto filtrato come risposta AJAX

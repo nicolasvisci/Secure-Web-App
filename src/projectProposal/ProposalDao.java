@@ -4,11 +4,11 @@ import java.io.IOException;
 
 import java.sql.*;
 
-import database.ConnessioniDatabase;
+import database.ConnectionsDatabase;
 import pannel.CustomMessage;
 import query.DatabaseQuery;
 
-public class PropostaDao {
+public class ProposalDao {
 
 	public static boolean uploadFile(String username, byte[] contenutoFile, String nomeFile)
 			throws IOException, SQLException {
@@ -17,7 +17,7 @@ public class PropostaDao {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 
-			con = ConnessioniDatabase.getConnectionWrite();
+			con = ConnectionsDatabase.getConnectionWrite();
 
 			try (PreparedStatement ps = con.prepareStatement(DatabaseQuery.insertProposta())) {
 				ps.setString(1, username);
