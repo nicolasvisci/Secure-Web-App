@@ -8,7 +8,7 @@ import query.DatabaseQuery;
 import pannel.CustomMessage;
 
 public class LoginDao {
-	static boolean isUserValid(String name, byte[] password) {
+	static boolean isUserValid(String username, byte[] password) {
 		boolean status = false;
 
 		Connection con = null;
@@ -20,7 +20,7 @@ public class LoginDao {
 
 			con = ConnectionsDatabase.getConnectionRead();
 			ps_pwd = con.prepareStatement(DatabaseQuery.takeUserSale());
-			ps_pwd.setString(1, name);
+			ps_pwd.setString(1, username);
 
 			rs = ps_pwd.executeQuery();
 
@@ -32,13 +32,13 @@ public class LoginDao {
 					byte[] newPassword = PasswordManagement.concatenateAndHash(password, sale);
 
 					try (PreparedStatement ps = con.prepareStatement(DatabaseQuery.getSelectUserQuery())) {
-						ps.setString(1, name);
+						ps.setString(1, username);
 						ps.setBytes(2, newPassword);
 
 						rs = ps.executeQuery();
 						boolean userFound = rs.next();
 
-						name = null;
+						username = null;
 						PasswordManagement.clearBytes(password);
 						PasswordManagement.clearBytes(sale);
 						PasswordManagement.clearBytes(newPassword);
@@ -53,14 +53,14 @@ public class LoginDao {
 						status = userFound;
 					}
 				} else {
-					name = null;
+					username = null;
 					PasswordManagement.clearBytes(password);
 					System.out.println("User_Sales e' nullo");
 				}
 			} else {
-				name = null;
+				username = null;
 				PasswordManagement.clearBytes(password);
-				System.out.println("Nessun risultato trovato per l'utente: " + name);
+				System.out.println("Nessun risultato trovato per l'utente: " + username);
 			}
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();

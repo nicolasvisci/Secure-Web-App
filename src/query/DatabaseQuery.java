@@ -108,12 +108,12 @@ public class DatabaseQuery {
 			}
 			appProperties.load(input);
 		} catch (IOException e) {
-			System.out.println("Query DatabaseQuery - insertProposta");
+			System.out.println("Query DatabaseQuery - insertProposal");
 			e.printStackTrace();
 			return null;
 		}
 
-		return appProperties.getProperty("db.query_insertProposta");
+		return appProperties.getProperty("db.query_insertProposal");
 	}
 
 	public static String takeUsernameAndProposal() {
@@ -127,12 +127,12 @@ public class DatabaseQuery {
 			}
 			appProperties.load(input);
 		} catch (IOException e) {
-			System.out.println("Query DatabaseQuery - takeUsernameAndProposta");
+			System.out.println("Query DatabaseQuery - takeUsernameAndProposal");
 			e.printStackTrace();
 			return null;
 		}
 
-		return appProperties.getProperty("db.query_takeUsernameAndProposta");
+		return appProperties.getProperty("db.query_takeUsernameAndProposal");
 	}
 
 }

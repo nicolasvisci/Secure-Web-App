@@ -13,7 +13,7 @@ import java.util.Properties;
 class Aes {
 
 	private static final String AES_KEY = aesKey();
-	private static final String AES_IV = "1234567890123456"; // Cambia l'IV a tuo piacimento
+	private static final String AES_IV = "9162091624810428"; // Cambia l'IV a tuo piacimento
 
 	private static SecretKey secretKey;
 

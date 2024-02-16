@@ -58,18 +58,18 @@ public class LoginServlet extends HttpServlet {
 
 		byte[] byte_username = null;
 
-		String nomeUtente = request.getParameter("username");
+		String username = request.getParameter("username");
 		byte[] password = request.getParameter("pass").getBytes();
-		boolean ricordami = request.getParameter("ricordami") != null;
+		boolean rememberMe = request.getParameter("ricordami") != null;
 
 		String string_Password = byteArrayToString(password);
 
-		if (ricordami) {
+		if (rememberMe) {
 			try {
 
 				try {
 					// CONVERTO LA STRINGA IN BYTE
-					byte_username = nomeUtente.getBytes(java.nio.charset.StandardCharsets.UTF_8);
+					byte_username = username.getBytes(java.nio.charset.StandardCharsets.UTF_8);
 
 					// AGGIUNGO IL PADDING PER EVITARE PROBLEMI DI DECIFRATURA ED EFFETTUO LA
 					// CIFRATURA
@@ -88,7 +88,7 @@ public class LoginServlet extends HttpServlet {
 				string_encryptedPassword = byteArrayToString(byte_encryptedPassword);
 
 				System.out.println("Encrypted username: " + string_encryptedUsername);
-				System.out.println("Encrypted username: " + string_encryptedPassword);
+				System.out.println("Encrypted password: " + string_encryptedPassword);
 
 			} catch (Exception e) {
 				System.out.println("Errore durante l'encrypt di username e/o password");
@@ -99,7 +99,7 @@ public class LoginServlet extends HttpServlet {
 			String base64EncodedPassword = Base64.getEncoder().encodeToString(byte_encryptedPassword);
 
 			try {
-				if (LoginDao.isUserValid(nomeUtente, password)) {
+				if (LoginDao.isUserValid(username, password)) {
 					// session = request.getSession();
 					// session.setAttribute("username", nomeUtente);
 
@@ -115,19 +115,19 @@ public class LoginServlet extends HttpServlet {
 					response.addCookie(usernameCookie);
 					response.addCookie(passwordCookie);
 
-					request.setAttribute("nomeUtente", nomeUtente);
+					request.setAttribute("nomeUtente", username);
 					request.setAttribute("login", true); // Se questa variabile non viene inizializzata su true,
 															// l'utente non riesce ad accedere a benvenuto.jsp
 
 					PasswordManagement.clearBytes(password);
-					nomeUtente = null;
+					username = null;
 
 					request.getRequestDispatcher("welcome.jsp").forward(request, response);
 				} else {
-					System.out.println("ERRORE metodo isUserValid checked - username: " + nomeUtente);
+					System.out.println("ERRORE metodo isUserValid checked - username: " + username);
 					System.out.println("ERRORE metodo isUserValid checked - password: " + string_Password);
 
-					nomeUtente = null;
+					username = null;
 					PasswordManagement.clearBytes(password);
 
 					CustomMessage.showPanel("Sembra che questo utente non esista! Controlla i dati inseriti.");
@@ -140,24 +140,24 @@ public class LoginServlet extends HttpServlet {
 		} else {
 
 			try {
-				if (LoginDao.isUserValid(nomeUtente, password)) {
+				if (LoginDao.isUserValid(username, password)) {
 
 					// session = request.getSession();
 					// session.setAttribute("username", nomeUtente);
 
 					request.setAttribute("login", true); // Se questa variabile non viene inizializzata su true,
 															// l'utente non riesce ad accedere a benvenuto.jsp
-					request.setAttribute("nomeUtente", nomeUtente);
+					request.setAttribute("nomeUtente", username);
 
 					PasswordManagement.clearBytes(password);
-					nomeUtente = null;
+					username = null;
 
 					request.getRequestDispatcher("welcome.jsp").forward(request, response);
 				} else {
-					System.out.println("ERRORE metodo isUserValid 2 - username: " + nomeUtente);
+					System.out.println("ERRORE metodo isUserValid 2 - username: " + username);
 					System.out.println("ERRORE metodo isUserValid 2 - password: " + string_Password);
 
-					nomeUtente = null;
+					username = null;
 					PasswordManagement.clearBytes(password);
 
 					CustomMessage.showPanel("Password errata! Riprova.");

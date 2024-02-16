@@ -30,38 +30,38 @@ public class RegistrationServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		String nomeUtente = request.getParameter("username");
+		String username = request.getParameter("username");
 		String regex = "^[a-zA-Z0-9]+$";
 		byte[] password = request.getParameter("password").getBytes();
-		byte[] conferma_password = request.getParameter("conferma_password").getBytes();
+		byte[] confirm_password = request.getParameter("conferma_password").getBytes();
 		Part filePart = request.getPart("ImmagineProfilo");
 
-		if (nomeUtente.matches(regex) && nomeUtente.length() <= 45) {
+		if (username.matches(regex) && username.length() <= 45) {
 			if (PasswordManagement.isStrongPassword(password)) {
-				if (Arrays.equals(password, conferma_password)) {
+				if (Arrays.equals(password, confirm_password)) {
 					if (CheckFile.checkImageFile(filePart)) {
 						System.out.println("File valido");
 
-						byte[] sale = PasswordManagement.generateRandomBytes(16);
-						byte[] newPassword = PasswordManagement.concatenateAndHash(password, sale);
+						byte[] salt = PasswordManagement.generateRandomBytes(16);
+						byte[] newPassword = PasswordManagement.concatenateAndHash(password, salt);
 
 						try {
-							if (RegistrationDao.userRegistration(nomeUtente, newPassword, sale, filePart)) {
+							if (RegistrationDao.userRegistration(username, newPassword, salt, filePart)) {
 
-								nomeUtente = null;
+								username = null;
 								PasswordManagement.clearBytes(newPassword);
 								PasswordManagement.clearBytes(password);
-								PasswordManagement.clearBytes(conferma_password);
-								PasswordManagement.clearBytes(sale);
+								PasswordManagement.clearBytes(confirm_password);
+								PasswordManagement.clearBytes(salt);
 
 								response.sendRedirect("login.jsp");
 							} else {
 
-								nomeUtente = null;
+								username = null;
 								PasswordManagement.clearBytes(newPassword);
 								PasswordManagement.clearBytes(password);
-								PasswordManagement.clearBytes(conferma_password);
-								PasswordManagement.clearBytes(sale);
+								PasswordManagement.clearBytes(confirm_password);
+								PasswordManagement.clearBytes(salt);
 								CustomMessage.showPanel("Errore durante la registrazione!");
 								request.getRequestDispatcher("registration.jsp").forward(request, response);
 
