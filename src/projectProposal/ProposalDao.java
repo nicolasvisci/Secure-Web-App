@@ -19,7 +19,7 @@ public class ProposalDao {
 
 			con = ConnectionsDatabase.getConnectionWrite();
 
-			try (PreparedStatement ps = con.prepareStatement(DatabaseQuery.insertProposta())) {
+			try (PreparedStatement ps = con.prepareStatement(DatabaseQuery.insertProposal())) {
 				ps.setString(1, username);
 				ps.setBytes(2, contenutoFile);
 				ps.setString(3, nomeFile);

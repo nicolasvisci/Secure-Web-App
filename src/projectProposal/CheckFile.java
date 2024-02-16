@@ -17,7 +17,7 @@ import pannel.CustomMessage;
 
 public class CheckFile {
 
-	static boolean checkPropostaFile(Part filePart, ServletContext context) throws IOException {
+	static boolean checkProposalFile(Part filePart, ServletContext context) throws IOException {
 		// Controlla se il file e' stato effettivamente caricato
 		if (filePart != null && filePart.getSize() > 0) {
 			// Ottieni il nome del file

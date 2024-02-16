@@ -33,7 +33,7 @@ public class ProposalServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		List<Proposal> proposte = Proposal.getProposte();
+		List<Proposal> proposte = Proposal.getProposals();
 
 		// Converti la lista in JSON
 		String jsonProposte = new Gson().toJson(proposte);
@@ -50,7 +50,7 @@ public class ProposalServlet extends HttpServlet {
 		Part filePart = request.getPart("Proposta progettuale");
 		String nomeUtente = request.getParameter("nomeUtente");
 
-		if (CheckFile.checkPropostaFile(filePart, getServletContext())) {
+		if (CheckFile.checkProposalFile(filePart, getServletContext())) {
 
 			String cleanedHtml = CheckFile.processFile(filePart);
 

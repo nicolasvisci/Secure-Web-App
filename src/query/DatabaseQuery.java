@@ -97,7 +97,7 @@ public class DatabaseQuery {
 		return appProperties.getProperty("db.query_takeUserSale");
 	}
 
-	public static String insertProposta() {
+	public static String insertProposal() {
 
 		Properties appProperties = new Properties();
 
@@ -116,7 +116,7 @@ public class DatabaseQuery {
 		return appProperties.getProperty("db.query_insertProposta");
 	}
 
-	public static String takeUsernameAndProposta() {
+	public static String takeUsernameAndProposal() {
 
 		Properties appProperties = new Properties();
 

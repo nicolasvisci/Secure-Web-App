@@ -21,12 +21,12 @@ public class Proposal {
 		this.contenutoHtml = contenutoHtml;
 	}
 
-	public static List<Proposal> getProposte() {
+	public static List<Proposal> getProposals() {
 		List<Proposal> proposte = new ArrayList<>();
 
 		try (Connection connection = ConnectionsDatabase.getConnectionRead();
 				PreparedStatement preparedStatement = connection
-						.prepareStatement(DatabaseQuery.takeUsernameAndProposta());
+						.prepareStatement(DatabaseQuery.takeUsernameAndProposal());
 				ResultSet resultSet = preparedStatement.executeQuery()) {
 
 			while (resultSet.next()) {
@@ -53,7 +53,7 @@ public class Proposal {
 		return contenutoHtml;
 	}
 
-	public String getNomeFile() {
+	public String getNameFile() {
 		return nomeFile;
 	}
 }
