@@ -18,9 +18,7 @@ import com.google.gson.JsonObject;
 import pannel.CustomMessage;
 import password.PasswordManagement;
 
-/**
- * Servlet implementation class LoginServlet
- */
+
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -100,8 +98,6 @@ public class LoginServlet extends HttpServlet {
 
 			try {
 				if (LoginDao.isUserValid(username, password)) {
-					// session = request.getSession();
-					// session.setAttribute("username", nomeUtente);
 
 					Cookie usernameCookie = new Cookie("username", base64EncodedUsername);
 					Cookie passwordCookie = new Cookie("password", base64EncodedPassword);
@@ -116,16 +112,13 @@ public class LoginServlet extends HttpServlet {
 					response.addCookie(passwordCookie);
 
 					request.setAttribute("nomeUtente", username);
-					request.setAttribute("login", true); // Se questa variabile non viene inizializzata su true,
-															// l'utente non riesce ad accedere a benvenuto.jsp
+					request.setAttribute("login", true);
 
 					PasswordManagement.clearBytes(password);
 					username = null;
 
 					request.getRequestDispatcher("welcome.jsp").forward(request, response);
 				} else {
-					System.out.println("ERRORE metodo isUserValid checked - username: " + username);
-					System.out.println("ERRORE metodo isUserValid checked - password: " + string_Password);
 
 					username = null;
 					PasswordManagement.clearBytes(password);
@@ -142,11 +135,7 @@ public class LoginServlet extends HttpServlet {
 			try {
 				if (LoginDao.isUserValid(username, password)) {
 
-					// session = request.getSession();
-					// session.setAttribute("username", nomeUtente);
-
-					request.setAttribute("login", true); // Se questa variabile non viene inizializzata su true,
-															// l'utente non riesce ad accedere a benvenuto.jsp
+					request.setAttribute("login", true);
 					request.setAttribute("nomeUtente", username);
 
 					PasswordManagement.clearBytes(password);
@@ -154,8 +143,6 @@ public class LoginServlet extends HttpServlet {
 
 					request.getRequestDispatcher("welcome.jsp").forward(request, response);
 				} else {
-					System.out.println("ERRORE metodo isUserValid 2 - username: " + username);
-					System.out.println("ERRORE metodo isUserValid 2 - password: " + string_Password);
 
 					username = null;
 					PasswordManagement.clearBytes(password);
@@ -167,8 +154,6 @@ public class LoginServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-
-		// checkCookie(request, response);
 	}
 
 	private byte[] pad(byte[] bytes) {
@@ -234,7 +219,7 @@ public class LoginServlet extends HttpServlet {
 					byte_encryptedPasswordCookie = Base64.getDecoder().decode(string_encryptedPasswordCookie);
 				} else if (!cookie.getName().equals("JSESSIONID")) {
 					// Se il cookie non si chiama "username" o "password" o "JSESSIONID", invalidalo
-					cookie.setValue(""); // Imposta il valore del cookie a una stringa vuota
+					cookie.setValue("");
 					cookie.setMaxAge(0);
 					response.addCookie(cookie);
 				}
@@ -266,7 +251,6 @@ public class LoginServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-
 		response.getWriter().write(cookieData.toString());
 	}
 }

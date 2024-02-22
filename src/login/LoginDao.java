@@ -46,9 +46,9 @@ public class LoginDao {
 						if (userFound) {
 							System.out.println("Utente trovato");
 						} else {
-							CustomMessage.showPanel("Errore nell'inserimento dei dati dell'utente. Riprova"); // VALUTARE
-																												// DI
-																												// ELIMINARE?
+							CustomMessage.showPanel("Errore nell'inserimento dei dati dell'utente. Riprova");
+																												
+																												
 						}
 						status = userFound;
 					}

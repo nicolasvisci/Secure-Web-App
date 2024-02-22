@@ -321,16 +321,17 @@ document.addEventListener("DOMContentLoaded", function() {
 				<td><input type="submit" value="Carica Proposta"></td>
 			</tr>
 			<tr>
-				<!-- Banner -->
-				<!--<div id="banner">-->
 
 				<div id="contenutoBanner">
 
-					<% if (propostePrimaCaricamento == null || propostePrimaCaricamento.isEmpty()) { %>
+					<%
+					if (propostePrimaCaricamento == null || propostePrimaCaricamento.isEmpty()) {
+					%>
 					<p>Seleziona una proposta progettuale.</p>
-					<% } %>
+					<%
+					}
+					%>
 				</div>
-				<!-- </div> -->
 
 			</tr>
 			<tr>
