@@ -41,10 +41,6 @@ public class LoginServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("application/json; charset=UTF-8");
 
-		HttpSession session = request.getSession();
-
-		session = request.getSession();
-
 		String string_encryptedUsername = null;
 		String string_encryptedPassword = null;
 
@@ -60,7 +56,7 @@ public class LoginServlet extends HttpServlet {
 		byte[] password = request.getParameter("pass").getBytes();
 		boolean rememberMe = request.getParameter("ricordami") != null;
 
-		String string_Password = byteArrayToString(password);
+		
 
 		if (rememberMe) {
 			try {

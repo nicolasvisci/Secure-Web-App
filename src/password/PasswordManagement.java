@@ -50,29 +50,32 @@ public class PasswordManagement {
 	}
 
 	public static boolean isStrongPassword(byte[] password) {
-		String passwordString = new String(password);
 
-		return isLengthValid(passwordString) && containsUpperCase(passwordString) && containsDigit(passwordString)
-				&& containsSpecialCharacter(passwordString);
-	}
+		// Check the minimum length of the password
+		if (password.length < 8) {
+			return false;
+		}
 
-	private static boolean isLengthValid(String str) {
+		// Check for lowercase, uppercase, numbers, and special characters
+		boolean hasLowerCase = false;
+		boolean hasUpperCase = false;
+		boolean hasDigit = false;
+		boolean hasSpecialChar = false;
 
-		return str.length() >= 8;
-	}
+		for (byte b : password) {
+			char c = (char) b;
+			if (Character.isLowerCase(c)) {
+				hasLowerCase = true;
+			} else if (Character.isUpperCase(c)) {
+				hasUpperCase = true;
+			} else if (Character.isDigit(c)) {
+				hasDigit = true;
+			} else if (!Character.isLetterOrDigit(c)) {
+				hasSpecialChar = true;
+			}
+		}
 
-	private static boolean containsUpperCase(String str) {
+		return hasLowerCase && hasUpperCase && hasDigit && hasSpecialChar;
 
-		return Pattern.compile("[A-Z]").matcher(str).find();
-	}
-
-	private static boolean containsDigit(String str) {
-
-		return Pattern.compile("\\d").matcher(str).find();
-	}
-
-	private static boolean containsSpecialCharacter(String str) {
-		String specialCharacters = "!@#$%^&*()-_+=<>?.";
-		return Pattern.compile("[" + Pattern.quote(specialCharacters) + "]").matcher(str).find();
 	}
 }
